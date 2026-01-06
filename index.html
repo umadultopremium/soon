@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adulto Premium — Em breve</title>
+
+  <style>
+    :root {
+      --blue-dark: #0b1c2d;
+      --blue-main: #0d5fff;
+      --blue-soft: #4da3ff;
+      --white: #ffffff;
+      --text-soft: #cfd9e3;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(
+          1200px 600px at 10% 10%,
+          rgba(77, 163, 255, 0.25),
+          transparent 60%
+        ),
+        linear-gradient(135deg, var(--blue-dark), #081423);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+      background: rgba(13, 95, 255, 0.05);
+      border: 1px solid rgba(77, 163, 255, 0.25);
+      border-radius: 20px;
+      padding: 48px 32px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .logo span {
+      color: var(--blue-soft);
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-soft);
+      margin-bottom: 36px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      background: rgba(13, 95, 255, 0.15);
+      border: 1px solid rgba(77, 163, 255, 0.35);
+      border-radius: 14px;
+      padding: 18px 16px;
+      min-width: 90px;
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .time-box small {
+      font-size: 12px;
+      color: var(--text-soft);
+      letter-spacing: 0.5px;
+    }
+
+    .message h2 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .message p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .message strong {
+      color: var(--white);
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: rgba(207, 217, 227, 0.6);
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 26px;
+      }
+
+      .message h2 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo">
+      Adulto <span>Premium</span>
+    </div>
+
+    <div class="subtitle">
+      A vida adulta, sem sofrimento desnecessário.
+    </div>
+
+    <div class="countdown" id="countdown">
+      <div class="time-box">
+        <span id="days">00</span>
+        <small>DIAS</small>
+      </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        <small>HORAS</small>
+      </div>
+      <div class="time-box">
+        <span id="minutes">00</span>
+        <small>MIN</small>
+      </div>
+      <div class="time-box">
+        <span id="seconds">00</span>
+        <small>SEG</small>
+      </div>
+    </div>
+
+    <div class="message">
+      <h2>Ninguém te ensinou como ser adulto. A gente ensina.</h2>
+      <p>
+        O <strong>Adulto Premium</strong> é um guia prático para resolver as coisas
+        básicas da vida adulta sem dor de cabeça.
+      </p>
+      <p>
+        Casa, dinheiro, documentos, rotina e tudo aquilo que você aprende
+        no susto depois que sai da casa dos pais.
+      </p>
+      <p>
+        Sem papo de coach. Sem teoria inútil.<br/>
+        Só checklists, passo a passo e vida real.
+      </p>
+    </div>
+
+    <div class="footer">
+      © Adulto Premium — Em breve
+    </div>
+  </div>
+
+  <script>
+    // DEFINA A DATA DE LANÇAMENTO AQUI (YYYY-MM-DD)
+    const launchDate = new Date("2026-02-06T00:00:00").getTime();
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance < 0) {
+        daysEl.innerText = "00";
+        hoursEl.innerText = "00";
+        minutesEl.innerText = "00";
+        secondsEl.innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      daysEl.innerText = String(days).padStart(2, "0");
+      hoursEl.innerText = String(hours).padStart(2, "0");
+      minutesEl.innerText = String(minutes).padStart(2, "0");
+      secondsEl.innerText = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
